@@ -92,7 +92,9 @@ function buildAnimations() {
   });
   cleanupFns.push(() => ctx.revert());
 
-  // Sparkle cursor trail — throttled, pointer only.
+  // Sparkle cursor trail — throttled, fine pointers only (on touch, pointermove
+  // fires during scroll and rains glitter over the content).
+  if (window.matchMedia("(pointer: coarse)").matches) return;
   let last = 0;
   trailHandler = event => {
     const now = performance.now();
