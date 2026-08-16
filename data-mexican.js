@@ -12,7 +12,7 @@ const f = {
 export const mexicanPlan = {
   video, label: "Mexican", shortLabel: "Mexican", title: "$50 Mexican component week",
   copy: "A complete budget system: one braised pork, beans, masa, salsa, slaw, and crema recombined into tacos, flautas, tamales, chilaquiles, and soup.",
-  note: "All dishes and quantities are adapted from the linked recipe document; the pork is scaled to one person plus freezer portions.",
+  note: "All dishes and quantities are adapted from the linked recipe document; the pork is scaled down to about 3 lb plus freezer portions.",
   formula: [[1, "chipotle pork braise"], [1, "pot of black beans"], [1, "masa dough system"], [3, "cold toppings"]],
   formulaPlus: "+ five later-week transformations", prepMinutes: "130*", coreCount: 6,
   weekNote: "One grocery basket becomes ten recipes; *130 active minutes plus the unattended pork braise.",
@@ -52,7 +52,7 @@ export const mexicanPlan = {
     ["2:10", "Cool + split", "Shred pork. Refrigerate four days; freeze the later-week half."],
   ],
   recipes: [
-    ["Chipotle braised pork", "BRAISE", "The master component, scaled to about 3 lb for one person.", ["3 lb pork butt", "1 onion", "3 garlic cloves", "1 jalapeño", "3 chipotles + adobo", "16 oz crushed tomatoes"], ["Cube, season, and brown pork in batches.", "Sauté aromatics; add tomato, chipotle, cilantro stems, water, and pork.", "Cover and simmer 3–4 hr; cool and shred."], 131],
+    ["Chipotle braised pork", "BRAISE", "The master component, scaled to about 3 lb.", ["3 lb pork butt", "1 onion", "3 garlic cloves", "1 jalapeño", "3 chipotles + adobo", "16 oz crushed tomatoes"], ["Cube, season, and brown pork in batches.", "Sauté aromatics; add tomato, chipotle, cilantro stems, water, and pork.", "Cover and simmer 3–4 hr; cool and shred."], 131],
     ["Blender salsa", "BLEND", "A textured all-week salsa.", ["16 oz crushed tomatoes", "½ onion", "2 garlic cloves", "½ jalapeño", "½ cup cilantro", "1 lime"], ["Pulse all ingredients, then blend briefly on low.", "Season and refrigerate."], 510],
     ["Avocado cilantro crema", "BLEND", "A smooth, cool finishing sauce.", ["1 avocado", "⅓ cup cilantro", "¾ cup sour cream", "½ lime", "3 tbsp avocado oil"], ["Blend everything except oil.", "Stream in oil; thin to a squeezeable texture."], 510],
     ["Corn tortillas + masa", "GRIDDLE", "One dough becomes tortillas, then feeds the tamale and dumpling recipes.", ["4 cups masa harina", "1¼ tsp salt", "4 tbsp fat", "3½–4 cups warm water"], ["Knead to soft playdough texture; rest 10–15 min.", "Press and cook 30 sec, 45–60 sec, then 15–30 sec."], 510],
