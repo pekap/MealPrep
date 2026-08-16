@@ -75,6 +75,16 @@ function productThumb(text, cls) {
   const src = productImg(text);
   return src ? `<img class="${cls}" src="${src}" alt="" loading="lazy">` : "";
 }
+function inlineThumbs(text) {
+  const map = plan().products;
+  if (!map) return "";
+  const needle = text.toLowerCase();
+  const srcs = [...new Set(Object.entries(map).filter(([key]) => needle.includes(key)).map(([, src]) => src))];
+  return srcs.length ? `<span class="inline-thumbs">${srcs.map(s => `<img src="${s}" alt="" loading="lazy">`).join("")}</span>` : "";
+}
+function instructionItem(text) {
+  return `<li>${inlineThumbs(text)}${text}</li>`;
+}
 
 function renderPlanToggle() {
   document.querySelector("#planToggle").innerHTML = Object.entries(plans).map(([key, item]) =>
@@ -158,7 +168,7 @@ function renderTimeline() {
       <button class="step-check" type="button" data-step="${i}" aria-pressed="${done}" aria-label="Mark step ${i + 1} ${done ? "not done" : "done"}">${done ? "✓" : ""}</button>
       <div class="timeline-copy">
         <div class="step-head"><h3>${adapt(s.title)}</h3><span class="step-mins">~${s.mins} min</span></div>
-        <ol class="step-actions">${s.actions.map(a => `<li>${adapt(a)}</li>`).join("")}</ol>
+        <ol class="step-actions">${s.actions.map(a => instructionItem(adapt(a))).join("")}</ol>
         <p class="step-tip"><b>TIP</b> ${adapt(s.tip)}</p>
         <div class="step-items">${s.items.map(x => { const t = adapt(x); return `<span>${productThumb(t, "chip-thumb")}${t}</span>`; }).join("")}</div>
       </div>
@@ -198,8 +208,8 @@ function renderRecipes() {
     const sourceVideo = r[6] || plan().video;
     const sourceLabel = r[6] ? `OTHER VIDEO · ${formatTime(r[5])} ↗` : `SOURCE · ${formatTime(r[5])} ↗`;
     return `<details class="recipe-card"><summary><span>${adapt(r[0])}</span><span class="method-chip">${r[1]}</span></summary>
-      <div class="recipe-body"><p>${adapt(r[2])}</p>${beefNote}<div class="recipe-ingredients">${r[3].map(x => `<span>${adapt(x)}</span>`).join("")}</div>
-      <ol class="recipe-steps">${r[4].map(x => `<li>${adapt(x)}</li>`).join("")}</ol><a class="recipe-source" target="_blank" rel="noreferrer" href="${sourceVideo}&t=${r[5]}s">${sourceLabel}</a></div></details>`;
+      <div class="recipe-body"><p>${adapt(r[2])}</p>${beefNote}<div class="recipe-ingredients">${r[3].map(x => { const t = adapt(x); return `<span>${productThumb(t, "chip-thumb")}${t}</span>`; }).join("")}</div>
+      <ol class="recipe-steps">${r[4].map(x => instructionItem(adapt(x))).join("")}</ol><a class="recipe-source" target="_blank" rel="noreferrer" href="${sourceVideo}&t=${r[5]}s">${sourceLabel}</a></div></details>`;
   }).join("");
 }
 

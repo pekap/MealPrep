@@ -50,7 +50,7 @@ export const mediterraneanPlan = {
   // Ordered-product thumbnails (Amazon Fresh order 114-9548132-0724267, Aug 16).
   // Keys are matched as lowercase substrings against chip and shopping-row text.
   products: {
-    "ground beef": "/products/beef.jpg", "greek yogurt": "/products/yogurt.jpg", "fage": "/products/yogurt.jpg",
+    "ground beef": "/products/beef.jpg", "greek yogurt": "/products/yogurt.jpg", "fage": "/products/yogurt.jpg", "yogurt": "/products/yogurt.jpg",
     "feta": "/products/feta.jpg", "pesto": "/products/pesto.jpg", "hummus": "/products/hummus.jpg",
     "chickpea": "/products/garbanzo.jpg", "garbanzo": "/products/garbanzo.jpg", "pita": "/products/pita.jpg",
     "sun-dried": "/products/sun-dried.jpg", "sun dried": "/products/sun-dried.jpg", "harissa": "/products/harissa.jpg",

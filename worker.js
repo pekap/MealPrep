@@ -4,7 +4,7 @@ import { airFryerPlan } from "./data-air-fryer.js";
 
 const seedPlans = { mediterranean: mediterraneanPlan, mexican: mexicanPlan, air: airFryerPlan };
 // Bump when the bundled plan data changes and the DB copy should be refreshed.
-const SEED_VERSION = "4";
+const SEED_VERSION = "5";
 const json = (data, status = 200) => new Response(JSON.stringify(data), { status, headers: { "content-type": "application/json" } });
 
 async function ensureSeed(env) {
