@@ -24,8 +24,8 @@ const pf = {
 
 export const mediterraneanPlan = {
   video, label: "Mediterranean", shortLabel: "Med", title: "Mediterranean component week",
-  copy: "Mike’s 14-day lunch system, compressed into one week: five flexible components, a fresh crunch kit, and fast air-fryer finishes.",
-  note: "Source-video frames show Mike’s original turkey build; each timestamp opens the matching moment.",
+  copy: "A 14-day lunch system compressed into one week: five flexible components, a fresh crunch kit, and fast air-fryer finishes.",
+  note: "Source-video frames show the original turkey build; each timestamp opens the matching moment.",
   formula: [[1, "protein mix, two shapes"], [2, "vegetable builds"], [1, "cilantro-lime rice"], [1, "herby sauce"]],
   formulaPlus: "+ fresh crunch & pantry pivots", prepMinutes: "90", coreCount: 5,
   weekNote: "Same components, different geometry: bowl, pita, plate, salad, and snack box.",
@@ -58,7 +58,7 @@ export const mediterraneanPlan = {
   orderNotes: {
     label: "Ordered Aug 16 · Amazon Fresh · matched to this session",
     notes: [
-      "Your 90/10 beef replaces Mike’s turkey — the beef toggle updates every step and temperature.",
+      "Your 90/10 beef replaces the source recipe’s turkey — the beef toggle updates every step and temperature.",
       "Rice is your own jasmine from home: measure 2 cups before you start.",
       "365 coleslaw mix stands in for red cabbage in the crunch kit.",
       "No sumac in the order — skip it; za’atar carries the seasoning.",
@@ -96,10 +96,10 @@ export const mediterraneanPlan = {
       items: ["7 containers", "Freezer bags", "Tape + marker"] },
   ],
   recipes: [
-    ["Pesto–sun-dried turkey", "AIR FRY", "Mike’s pesto turkey burger mixture, split into two shapes.", ["2 lb ground turkey", "1 cup pesto", "¼ cup sun-dried tomatoes", "½ cup breadcrumbs", "salt + pepper"], ["Mix gently and shape 4 patties plus 12 meatballs.", "Air-fry at 380°F for 10–12 min to 165°F.", "Freeze uncooked extras in one layer, then bag."], 295],
-    ["Za’atar chickpea + cauliflower", "AIR FRY", "A speed-adjusted version of Mike’s crisp tray.", ["2 cans chickpeas", "1 cauliflower", "2 tbsp za’atar", "1 tsp sumac", "3 tbsp olive oil"], ["Dry chickpeas; cut cauliflower small.", "Toss and air-fry in loose batches at 390°F for 15–18 min."], 122],
+    ["Pesto–sun-dried turkey", "AIR FRY", "The source video’s pesto turkey burger mixture, split into two shapes.", ["2 lb ground turkey", "1 cup pesto", "¼ cup sun-dried tomatoes", "½ cup breadcrumbs", "salt + pepper"], ["Mix gently and shape 4 patties plus 12 meatballs.", "Air-fry at 380°F for 10–12 min to 165°F.", "Freeze uncooked extras in one layer, then bag."], 295],
+    ["Za’atar chickpea + cauliflower", "AIR FRY", "A speed-adjusted take on the source video’s crisp tray.", ["2 cans chickpeas", "1 cauliflower", "2 tbsp za’atar", "1 tsp sumac", "3 tbsp olive oil"], ["Dry chickpeas; cut cauliflower small.", "Toss and air-fry in loose batches at 390°F for 15–18 min."], 122],
     ["Harissa sweet potatoes", "AIR FRY", "The sturdy vegetable component.", ["5 sweet potatoes", "⅓ cup harissa", "2 tbsp olive oil", "salt"], ["Cut into ¾-inch pieces and coat.", "Air-fry at 390°F for 18–22 min; shake twice."], 545],
-    ["Cilantro-lime rice", "RICE COOKER", "Mike’s freezer rice from the modular-component video: herbs go in off the heat, so they stay green.", ["2 cups jasmine or basmati rice", "1 cup chicken broth", "2 cups water", "1 cup chopped cilantro", "1 lime"], ["Rinse the rice until the water runs clear.", "Cook with the broth and water on the plain white-rice setting, or covered on the stove for 15 min plus a 10 min rest.", "Spread and cool slightly — hot rice cooks the herbs — then fold in the cilantro and lime juice.", "Portion into molds; refrigerate four days and freeze the rest."], 762, "https://www.youtube.com/watch?v=-35JXpiQ3EA"],
+    ["Cilantro-lime rice", "RICE COOKER", "Freezer rice from the modular-component video: herbs go in off the heat, so they stay green.", ["2 cups jasmine or basmati rice", "1 cup chicken broth", "2 cups water", "1 cup chopped cilantro", "1 lime"], ["Rinse the rice until the water runs clear.", "Cook with the broth and water on the plain white-rice setting, or covered on the stove for 15 min plus a 10 min rest.", "Spread and cool slightly — hot rice cooks the herbs — then fold in the cilantro and lime juice.", "Portion into molds; refrigerate four days and freeze the rest."], 762, "https://www.youtube.com/watch?v=-35JXpiQ3EA"],
     ["Herbed yogurt–feta", "BLEND", "One cool, acidic sauce for the entire week.", ["1 cup Greek yogurt", "¼ cup feta", "2 tbsp tahini", "2 lemons", "2 garlic cloves", "parsley + mint"], ["Blend smooth; stream in olive oil.", "Thin with water and season."], 837],
   ],
   shopping: [
@@ -114,10 +114,10 @@ export const mediterraneanPlan = {
     times: [["02:02",122],["04:55",295],["09:05",545],["14:47",887]],
   }, {
     title: "A Revolution in Meal Prepping…", year: "2025", image: "/frames/frozen-components-final-15-41.png",
-    note: "Source for the cilantro-lime rice component only. Mike freezes it in molds alongside the other Lego-style parts.",
+    note: "Source for the cilantro-lime rice component only. The video freezes it in molds alongside the other Lego-style parts.",
     video: "https://www.youtube.com/watch?v=-35JXpiQ3EA",
     doc: "https://docs.google.com/document/d/1SfdpppBdyXXXClSx47aDjUZK2pIhm7TZsX9RRF9Kjb4/edit",
     times: [["12:42",762],["15:41",941]],
   }],
-  methodNote: "Mike’s 14-day lunch video supplies the component system. The rice is swapped for the cilantro-lime rice from his freezer-component video — no raisins, jasmine or basmati either way. The beef toggle is a clearly labeled adaptation; the source uses turkey. Air-fryer finishes are used throughout to keep weekday cleanup low.",
+  methodNote: "The 14-day lunch video supplies the component system. The rice is swapped for the cilantro-lime rice from the freezer-component video — no raisins, jasmine or basmati either way. The beef toggle is a clearly labeled adaptation; the source uses turkey. Air-fryer finishes are used throughout to keep weekday cleanup low.",
 };

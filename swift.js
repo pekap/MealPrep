@@ -10,7 +10,7 @@ let active = false;
 let cleanupFns = [];
 let trailHandler = null;
 
-const MARQUEE_TEXT = "IT’S BEEN A LONG TIME COMING ✦ PREP SEASON (MIKE’S VERSION) ✦ ARE YOU READY FOR IT? ✦ 14 MEALS ✦ 90 MINUTES ✦ ";
+const MARQUEE_TEXT = "IT’S BEEN A LONG TIME COMING ✦ PREP SEASON (D&P EDITION) ✦ ARE YOU READY FOR IT? ✦ 14 MEALS ✦ 90 MINUTES ✦ ";
 
 function injectDecor() {
   if (!document.querySelector(".swift-marquee")) {

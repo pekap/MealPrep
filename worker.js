@@ -3,14 +3,23 @@ import { mexicanPlan } from "./data-mexican.js";
 import { airFryerPlan } from "./data-air-fryer.js";
 
 const seedPlans = { mediterranean: mediterraneanPlan, mexican: mexicanPlan, air: airFryerPlan };
+// Bump when the bundled plan data changes and the DB copy should be refreshed.
+const SEED_VERSION = "2";
 const json = (data, status = 200) => new Response(JSON.stringify(data), { status, headers: { "content-type": "application/json" } });
 
 async function ensureSeed(env) {
-  const row = await env.DB.prepare("SELECT COUNT(*) AS n FROM plans").first();
-  if (row.n > 0) return;
-  await env.DB.batch(Object.entries(seedPlans).map(([id, data]) =>
-    env.DB.prepare("INSERT OR IGNORE INTO plans (id, data) VALUES (?1, ?2)").bind(id, JSON.stringify(data))
-  ));
+  const row = await env.DB.prepare("SELECT value FROM meta WHERE key = 'seed_version'").first().catch(() => null);
+  if (row?.value === SEED_VERSION) return;
+  await env.DB.batch([
+    ...Object.entries(seedPlans).map(([id, data]) =>
+      env.DB.prepare(
+        "INSERT INTO plans (id, data, updated_at) VALUES (?1, ?2, datetime('now')) ON CONFLICT(id) DO UPDATE SET data = ?2, updated_at = datetime('now')"
+      ).bind(id, JSON.stringify(data))
+    ),
+    env.DB.prepare(
+      "INSERT INTO meta (key, value) VALUES ('seed_version', ?1) ON CONFLICT(key) DO UPDATE SET value = ?1"
+    ).bind(SEED_VERSION),
+  ]);
 }
 
 async function handleApi(request, url, env) {

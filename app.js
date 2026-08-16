@@ -77,7 +77,7 @@ function renderStatic() {
   document.querySelector("#heroTitle").textContent = p.title;
   document.querySelector("#heroCopy").textContent = p.copy;
   document.querySelector("#proteinNote").textContent = activePlan === "mediterranean" && activeProtein === "beef"
-    ? "Beef mode updates the plan, safety temperature, and shopping list. Frames still show Mike’s original turkey build."
+    ? "Beef mode updates the plan, safety temperature, and shopping list. Frames still show the source video’s original turkey build."
     : p.note;
   document.querySelector("#formulaList").innerHTML = p.formula.map(([n, label]) => `<div class="formula-line"><strong>${n}</strong><span>${adapt(label)}</span></div>`).join("");
   document.querySelector("#formulaPlus").textContent = p.formulaPlus;

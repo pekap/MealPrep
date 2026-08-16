@@ -2,7 +2,7 @@ const video = "https://www.youtube.com/watch?v=3Bhd6NcqVJI";
 const v = (image, seconds, alt) => ({ image, seconds, alt, video });
 const m = (name, tags, description, method, frame) => ({ name, tags, description, method, frame });
 const f = {
-  tacos: v("/frames/mexican-tacos-670.jpg", 670, "Mike assembling a pork taco with cabbage slaw"),
+  tacos: v("/frames/mexican-tacos-670.jpg", 670, "Assembling a pork taco with cabbage slaw"),
   flautas: v("/frames/mexican-flautas-935.jpg", 935, "Finished zucchini and cabbage flautas"),
   tamales: v("/frames/mexican-tamales-1040.jpg", 1040, "Pork tamale plated with crema and onion"),
   chilaquiles: v("/frames/mexican-chilaquiles-1140.jpg", 1140, "Air-fried tortilla chilaquiles with eggs"),
@@ -11,11 +11,11 @@ const f = {
 
 export const mexicanPlan = {
   video, label: "Mexican", shortLabel: "Mexican", title: "$50 Mexican component week",
-  copy: "Mike’s complete budget system: one braised pork, beans, masa, salsa, slaw, and crema recombined into tacos, flautas, tamales, chilaquiles, and soup.",
-  note: "All dishes and quantities are adapted from Mike’s linked recipe document; the pork is scaled to one person plus freezer portions.",
+  copy: "A complete budget system: one braised pork, beans, masa, salsa, slaw, and crema recombined into tacos, flautas, tamales, chilaquiles, and soup.",
+  note: "All dishes and quantities are adapted from the linked recipe document; the pork is scaled to one person plus freezer portions.",
   formula: [[1, "chipotle pork braise"], [1, "pot of black beans"], [1, "masa dough system"], [3, "cold toppings"]],
   formulaPlus: "+ five later-week transformations", prepMinutes: "130*", coreCount: 6,
-  weekNote: "One grocery basket becomes ten Mike G recipes; *130 active minutes plus the unattended pork braise.",
+  weekNote: "One grocery basket becomes ten recipes; *130 active minutes plus the unattended pork braise.",
   componentHeading: "Six high-leverage components",
   freezeCopy: "Freeze half the shredded pork and spare tortillas. Use slaw and avocado crema first; beans and salsa carry the late week.",
   equipment: "Air fryer + Dutch oven + blender",
@@ -27,10 +27,10 @@ export const mexicanPlan = {
   },
   meals: [
     ["MON", "17", m("Chipotle pork tacos", ["pork", "slaw", "crema"], "Corn tortillas, chipotle pork, cabbage-cilantro slaw, salsa, and avocado crema.", "Reheat pork; warm tortillas in the air fryer at 330°F for 1–2 min.", f.tacos), m("Pork + black bean bowl", ["pork", "beans", "salsa"], "Braised pork and beans topped with salsa, cheese, cilantro, and lime.", "Air-fry a tortilla at 370°F for 5–6 min for a crisp side.", f.tacos)],
-    ["TUE", "18", m("Black bean tostadas", ["beans", "tortilla", "crema"], "Crisp tortillas with smooth refried bean sauce, slaw, cheese, and crema.", "Air-fry tortillas at 370°F for 6–8 min; spread and top after cooking.", f.flautas), m("Zucchini-cabbage flautas", ["vegetable", "cheese", "salsa"], "Mike’s charred zucchini-cabbage filling rolled in tortillas with Jack cheese.", "Mike bakes these; air-fry at 380°F for 8–10 min for the same crisp structure.", f.flautas)],
-    ["WED", "19", m("Pork taco salad", ["pork", "slaw", "chips"], "Slaw, pork, black beans, crushed air-fried tortilla chips, salsa, and crema.", "Air-fry tortilla triangles at 370°F until crisp.", f.tacos), m("Jalapeño cornbread + beans", ["masa", "corn", "beans"], "Mike’s cheesy masa biscuits with black beans, pork, and salsa.", "Re-crisp a biscuit at 350°F for 4–5 min.", f.flautas)],
+    ["TUE", "18", m("Black bean tostadas", ["beans", "tortilla", "crema"], "Crisp tortillas with smooth refried bean sauce, slaw, cheese, and crema.", "Air-fry tortillas at 370°F for 6–8 min; spread and top after cooking.", f.flautas), m("Zucchini-cabbage flautas", ["vegetable", "cheese", "salsa"], "Charred zucchini-cabbage filling rolled in tortillas with Jack cheese.", "The source recipe bakes these; air-fry at 380°F for 8–10 min for the same crisp structure.", f.flautas)],
+    ["WED", "19", m("Pork taco salad", ["pork", "slaw", "chips"], "Slaw, pork, black beans, crushed air-fried tortilla chips, salsa, and crema.", "Air-fry tortilla triangles at 370°F until crisp.", f.tacos), m("Jalapeño cornbread + beans", ["masa", "corn", "beans"], "Cheesy masa biscuits with black beans, pork, and salsa.", "Re-crisp a biscuit at 350°F for 4–5 min.", f.flautas)],
     ["THU", "20", m("Pork tamales", ["pork", "masa", "crema"], "Pork-filled masa steamed in parchment, with salsa and avocado crema.", "Reheat wrapped; air-fry unwrapped for 3 min to crisp the edges.", f.tamales), m("Tamale + slaw plate", ["tamale", "slaw", "beans"], "A second tamale with cabbage slaw, black beans, cheese, and salsa.", "Warm beans separately so the slaw stays cold.", f.tamales)],
-    ["FRI", "21", m("Pork quesadilla", ["pork", "cheese", "tortilla"], "Pork and Jack folded in a corn tortilla with salsa and crema.", "Air-fry at 370°F for 6–8 min, flipping once.", f.tacos), m("Air-fryer chilaquiles", ["chips", "salsa", "eggs"], "Mike’s air-fried tortilla chips quickly coated in chipotle salsa and topped with eggs.", "Air-fry chips at 370°F for 10 min; sauce only immediately before eating.", f.chilaquiles)],
+    ["FRI", "21", m("Pork quesadilla", ["pork", "cheese", "tortilla"], "Pork and Jack folded in a corn tortilla with salsa and crema.", "Air-fry at 370°F for 6–8 min, flipping once.", f.tacos), m("Air-fryer chilaquiles", ["chips", "salsa", "eggs"], "Air-fried tortilla chips quickly coated in chipotle salsa and topped with eggs.", "Air-fry chips at 370°F for 10 min; sauce only immediately before eating.", f.chilaquiles)],
     ["SAT", "22", m("Flauta crunch box", ["flautas", "salsa", "slaw"], "Re-crisped flautas with slaw, salsa, crema, and lime.", "Air-fry at 380°F for 6–8 min from chilled.", f.flautas), m("Black bean masa soup", ["beans", "corn", "masa"], "Textured black bean soup with corn, cabbage, chipotle, cheese, and masa dumplings.", "Simmer dumplings covered for 20 min; reheat gently.", f.soup)],
     ["SUN", "23", m("Pork + bean tostadas", ["pork", "beans", "crunch"], "Crisp tortillas layered with bean sauce, pork, remaining toppings, and lime.", "Air-fry the tortilla base at 370°F for 6–8 min.", f.flautas), m("Freezer taco plate", ["freezer pork", "tortillas", "salsa"], "Thawed pork, stored tortillas, salsa, and remaining beans.", "Air-fry pork in a foil parcel at 350°F for 8–10 min; open for the last 2 min.", f.tacos)],
   ],
@@ -53,13 +53,13 @@ export const mexicanPlan = {
   ],
   recipes: [
     ["Chipotle braised pork", "BRAISE", "The master component, scaled to about 3 lb for one person.", ["3 lb pork butt", "1 onion", "3 garlic cloves", "1 jalapeño", "3 chipotles + adobo", "16 oz crushed tomatoes"], ["Cube, season, and brown pork in batches.", "Sauté aromatics; add tomato, chipotle, cilantro stems, water, and pork.", "Cover and simmer 3–4 hr; cool and shred."], 131],
-    ["Blender salsa", "BLEND", "Mike’s textured all-week salsa.", ["16 oz crushed tomatoes", "½ onion", "2 garlic cloves", "½ jalapeño", "½ cup cilantro", "1 lime"], ["Pulse all ingredients, then blend briefly on low.", "Season and refrigerate."], 510],
+    ["Blender salsa", "BLEND", "A textured all-week salsa.", ["16 oz crushed tomatoes", "½ onion", "2 garlic cloves", "½ jalapeño", "½ cup cilantro", "1 lime"], ["Pulse all ingredients, then blend briefly on low.", "Season and refrigerate."], 510],
     ["Avocado cilantro crema", "BLEND", "A smooth, cool finishing sauce.", ["1 avocado", "⅓ cup cilantro", "¾ cup sour cream", "½ lime", "3 tbsp avocado oil"], ["Blend everything except oil.", "Stream in oil; thin to a squeezeable texture."], 510],
     ["Corn tortillas + masa", "GRIDDLE", "One dough becomes tortillas, then feeds the tamale and dumpling recipes.", ["4 cups masa harina", "1¼ tsp salt", "4 tbsp fat", "3½–4 cups warm water"], ["Knead to soft playdough texture; rest 10–15 min.", "Press and cook 30 sec, 45–60 sec, then 15–30 sec."], 510],
     ["Cabbage-cilantro slaw", "NO COOK", "The fresh counterweight.", ["½ cabbage", "½ lime", "⅓ cup cilantro", "2–3 tbsp sour cream"], ["Slice finely and massage with remaining ingredients.", "Rest at least 1 hr."], 630],
     ["Black beans", "SIMMER", "The second master component.", ["1 lb dried black beans", "½ onion", "3 garlic cloves", "4 cups water"], ["Soak overnight.", "Simmer covered 2–3 hr until tender."], 684],
     ["Jalapeño-cheese cornbread", "BAKE", "Scoopable masa biscuits from the same budget basket.", ["1 cup sour cream", "2 eggs", "1 cup corn", "⅔ cup masa", "½ cup Jack", "1 jalapeño"], ["Whisk wet ingredients; fold in dry, cheese, and jalapeño.", "Bake at 400°F for 30–40 min."], 740],
-    ["Zucchini-cabbage flautas", "AIR FRY", "Mike bakes these; this air-fryer finish preserves his recipe’s structure.", ["⅓ cabbage", "2 zucchini", "cumin + paprika", "10 tortillas", "½ cup Jack"], ["Char vegetables and season.", "Roll warm tortillas; add cheese.", "Air-fry at 380°F for 8–10 min."], 830],
+    ["Zucchini-cabbage flautas", "AIR FRY", "The source recipe bakes these; this air-fryer finish preserves its structure.", ["⅓ cabbage", "2 zucchini", "cumin + paprika", "10 tortillas", "½ cup Jack"], ["Char vegetables and season.", "Roll warm tortillas; add cheese.", "Air-fry at 380°F for 8–10 min."], 830],
     ["Pork tamales", "STEAM", "A later-week transformation of pork and masa.", ["½ cup lard", "3 cups masa", "1 tsp baking powder", "2¾ cups stock", "shredded pork"], ["Whip fat; mix in masa and stock.", "Fill and wrap in parchment.", "Steam 45–60 min."], 948],
     ["Air-fryer chilaquiles", "AIR FRY", "The clearest air-fryer recipe in the Mexican plan.", ["6 tortillas", "1½ cups salsa", "chipotles", "1 lime", "4 eggs"], ["Cut and oil tortillas; air-fry at 370°F for 10 min.", "Blend sauce, fry eggs, then coat chips briefly and top."], 1090],
     ["Black bean masa soup", "SIMMER", "The final fridge-clear recipe.", ["1 cup beans", "1 cup corn", "¼ cabbage", "chipotle", "½ cup tamale dough", "¼ cup cheese"], ["Sauté vegetables; add beans, corn, chipotle, and water.", "Partly blend; add cheese and masa dumplings.", "Cover and cook dumplings 20 min."], 1180],
@@ -75,5 +75,5 @@ export const mexicanPlan = {
     doc: "https://docs.google.com/document/d/13yEjCRLBeYGfpOtCUOlJAy03eIy-GgRh1Zr_bk78h0c/edit",
     times: [["02:11",131],["08:30",510],["11:24",684],["15:48",948],["18:20",1100],["20:32",1232]],
   }],
-  methodNote: "This week takes nearly the whole savory system from Mike’s video: pork, salsa, crema, tortillas, slaw, beans, cornbread, flautas, tamales, chilaquiles, and soup. Quantities are paraphrased from his public document; pork is reduced from 5–6 lb to 3–4 lb for one person.",
+  methodNote: "This week takes nearly the whole savory system from the source video: pork, salsa, crema, tortillas, slaw, beans, cornbread, flautas, tamales, chilaquiles, and soup. Quantities are paraphrased from its public recipe document; pork is reduced from 5–6 lb to 3–4 lb for one person.",
 };
