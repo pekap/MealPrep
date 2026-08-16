@@ -8,7 +8,7 @@
     <title>Prep Week — Aug 17–23</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
@@ -23,7 +23,15 @@
           <span class="protein-toggle-label">Protein</span>
           <div class="protein-toggle" id="proteinToggle" aria-label="Choose protein base"></div>
         </div>
-        <button class="icon-button" id="themeToggle" type="button" aria-label="Toggle dark mode">◐</button>
+        <div class="theme-switch">
+          <button class="theme-button" id="themeToggle" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Choose theme">◐ <span id="themeLabel">Minimal</span></button>
+          <div class="theme-menu hidden" id="themeMenu" role="menu">
+            <button type="button" role="menuitem" data-theme-pick="minimal">○ Minimal</button>
+            <button type="button" role="menuitem" data-theme-pick="dark">● Dark</button>
+            <button type="button" role="menuitem" data-theme-pick="swift">✦ Taylor’s Version</button>
+            <button type="button" role="menuitem" data-theme-pick="mono">▪ Mono</button>
+          </div>
+        </div>
       </div>
     </header>
 

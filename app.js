@@ -238,6 +238,7 @@ function openMeal(dayIndex, key) {
 
 function renderAll() {
   renderPlanToggle(); renderStatic(); renderProteinToggle(); renderWeek(); renderComponents(); renderTimeline(); renderRecipes(); renderFilters(); renderShopping(); renderSources();
+  if (typeof activeTheme !== "undefined" && activeTheme === "swift" && swiftModule) swiftModule.refreshSwift();
 }
 
 function showToast(message) {
@@ -286,9 +287,40 @@ document.querySelector("#copyList").addEventListener("click", async () => {
 });
 document.querySelector(".dialog-close").addEventListener("click", () => document.querySelector("#mealDialog").close());
 document.querySelector("#mealDialog").addEventListener("click", event => { if (event.target === event.currentTarget) event.currentTarget.close(); });
-document.querySelector("#themeToggle").addEventListener("click", () => {
-  document.body.classList.toggle("dark"); localStorage.setItem("prep-theme", document.body.classList.contains("dark") ? "dark" : "light");
+const themeNames = { minimal: "Minimal", dark: "Dark", swift: "Taylor’s Version", mono: "Mono" };
+let activeTheme = localStorage.getItem("prep-theme") || "minimal";
+if (!themeNames[activeTheme]) activeTheme = activeTheme === "light" ? "minimal" : "minimal";
+let swiftModule = null;
+
+async function applyTheme(theme) {
+  const previous = activeTheme;
+  activeTheme = theme;
+  localStorage.setItem("prep-theme", theme);
+  document.body.dataset.theme = theme;
+  document.querySelector("#themeLabel").textContent = themeNames[theme];
+  document.querySelectorAll("[data-theme-pick]").forEach(b => b.classList.toggle("active", b.dataset.themePick === theme));
+  if (theme === "swift") {
+    swiftModule ??= await import("./swift.js");
+    swiftModule.enableSwift();
+  } else if (previous === "swift" && swiftModule) {
+    swiftModule.disableSwift();
+  }
+}
+
+const themeMenu = document.querySelector("#themeMenu");
+document.querySelector("#themeToggle").addEventListener("click", event => {
+  event.stopPropagation();
+  const open = themeMenu.classList.toggle("hidden");
+  document.querySelector("#themeToggle").setAttribute("aria-expanded", String(!open));
 });
-if (localStorage.getItem("prep-theme") === "dark") document.body.classList.add("dark");
+themeMenu.addEventListener("click", event => {
+  const pick = event.target.closest("[data-theme-pick]");
+  if (!pick) return;
+  themeMenu.classList.add("hidden");
+  applyTheme(pick.dataset.themePick);
+});
+document.addEventListener("click", () => themeMenu.classList.add("hidden"));
+
 renderAll();
+applyTheme(activeTheme);
 syncPlans().then(syncChecks);
