@@ -64,6 +64,17 @@ function macroLine(macros) {
   const mm = pickMacros(macros);
   return mm ? `<p class="meal-macros">${mm.kcal} kcal · ${mm.p}P · ${mm.c}C · ${mm.f}F</p>` : "";
 }
+function productImg(text) {
+  const map = plan().products;
+  if (!map) return null;
+  const needle = text.toLowerCase();
+  for (const [key, src] of Object.entries(map)) if (needle.includes(key)) return src;
+  return null;
+}
+function productThumb(text, cls) {
+  const src = productImg(text);
+  return src ? `<img class="${cls}" src="${src}" alt="" loading="lazy">` : "";
+}
 
 function renderPlanToggle() {
   document.querySelector("#planToggle").innerHTML = Object.entries(plans).map(([key, item]) =>
@@ -149,7 +160,7 @@ function renderTimeline() {
         <div class="step-head"><h3>${adapt(s.title)}</h3><span class="step-mins">~${s.mins} min</span></div>
         <ol class="step-actions">${s.actions.map(a => `<li>${adapt(a)}</li>`).join("")}</ol>
         <p class="step-tip"><b>TIP</b> ${adapt(s.tip)}</p>
-        <div class="step-items">${s.items.map(x => `<span>${adapt(x)}</span>`).join("")}</div>
+        <div class="step-items">${s.items.map(x => { const t = adapt(x); return `<span>${productThumb(t, "chip-thumb")}${t}</span>`; }).join("")}</div>
       </div>
       <div class="step-side">
         <span class="timeline-time">${s.time}</span>
@@ -205,7 +216,9 @@ function renderShopping() {
     const [category, name, qty, query] = item;
     const done = checked.has(index);
     const href = `https://www.amazon.com/s?k=${encodeURIComponent(query)}&i=amazonfresh`;
-    return `<div class="shop-row ${done ? "checked" : ""}"><input id="shop-${activePlan}-${index}" type="checkbox" data-index="${index}" ${done ? "checked" : ""}>
+    const thumb = productThumb(name, "shop-thumb-img");
+    return `<div class="shop-row ${done ? "checked" : ""} ${thumb ? "has-thumb" : ""}"><input id="shop-${activePlan}-${index}" type="checkbox" data-index="${index}" ${done ? "checked" : ""}>
+      ${thumb ? `<span class="shop-thumb">${thumb}</span>` : ""}
       <label class="shop-name" for="shop-${activePlan}-${index}">${name}<small>${qty} · ${categoryLabels[category]}</small></label><a class="amazon-link" href="${href}" target="_blank" rel="noreferrer">Fresh ↗</a></div>`;
   }).join("");
   document.querySelector("#remainingCount").textContent = all.length - checked.size;

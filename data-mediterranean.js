@@ -47,6 +47,20 @@ export const mediterraneanPlan = {
     ["SAT", "22", m("Crispy chickpea rice bowl", ["chickpea", "rice", "hummus"], "Cilantro-lime rice with crisp chickpea-cauliflower, hummus, herbs, and lemon.", "Heat rice and air-fry chickpeas separately.", f.bowlSauce, { kcal: 575, p: 18, c: 78, f: 23 }), m("Meatballs + harissa veg", ["turkey", "sweet potato", "sauce"], "Air-fried pesto turkey meatballs, sweet potatoes, and cucumber salad.", "Cook frozen meatballs at 380°F for 11–12 min; add potatoes for the final 7 min.", f.meatballs, { kcal: 665, p: 32, c: 61, f: 34, beef: { kcal: 695, p: 33, c: 61, f: 36 } })],
     ["SUN", "23", m("Fridge-clear chopped salad", ["crunch", "protein", "pita"], "Remaining vegetables, toasted pita, herbs, feta, and protein in one chopped salad.", "Toast pita at 350°F for 3–4 min; toss just before eating.", f.green, { kcal: 525, p: 26, c: 50, f: 24, beef: { kcal: 540, p: 27, c: 50, f: 25 } }), m("Freezer rescue bowl", ["freezer", "rice", "sauce"], "Frozen patty or meatballs with the final rice or potatoes and remaining sauce.", "Air-fry from frozen at 380°F for 11–12 min.", f.later, { kcal: 595, p: 31, c: 54, f: 29, beef: { kcal: 625, p: 32, c: 54, f: 31 } })],
   ],
+  // Ordered-product thumbnails (Amazon Fresh order 114-9548132-0724267, Aug 16).
+  // Keys are matched as lowercase substrings against chip and shopping-row text.
+  products: {
+    "ground beef": "/products/beef.jpg", "greek yogurt": "/products/yogurt.jpg", "fage": "/products/yogurt.jpg",
+    "feta": "/products/feta.jpg", "pesto": "/products/pesto.jpg", "hummus": "/products/hummus.jpg",
+    "chickpea": "/products/garbanzo.jpg", "garbanzo": "/products/garbanzo.jpg", "pita": "/products/pita.jpg",
+    "sun-dried": "/products/sun-dried.jpg", "sun dried": "/products/sun-dried.jpg", "harissa": "/products/harissa.jpg",
+    "broth": "/products/broth.jpg", "crumbs": "/products/breadcrumbs.jpg", "breadcrumb": "/products/breadcrumbs.jpg",
+    "tahini": "/products/tahini.jpg", "za’atar": "/products/zaatar.jpg", "olive oil": "/products/olive-oil.jpg",
+    "cauliflower": "/products/cauliflower.jpg", "sweet potato": "/products/sweet-potatoes.jpg",
+    "cucumber": "/products/cucumber.jpg", "red cabbage": "/products/coleslaw.jpg", "coleslaw": "/products/coleslaw.jpg",
+    "parsley": "/products/parsley.jpg", "mint": "/products/mint.jpg", "cilantro": "/products/cilantro.jpg",
+    "lemon": "/products/lemons.jpg", "lime": "/products/limes.jpg", "garlic": "/products/garlic.jpg",
+  },
   macroNote: "Macros are per single serving, computed from your ordered product labels (Barilla pesto, FAGE 0%, Athenos feta, Mina harissa, Progresso crumbs, canned garbanzos) plus USDA values for produce, rice, and 90/10 beef or 93/7 turkey. Treat as ±10% estimates — portioning by eye moves them more than label rounding does.",
   components: [
     ["01", "Pesto turkey, two ways", "One mixture becomes patties and meatballs; freeze half raw.", ["8 portions", "air fryer"], { kcal: 335, p: 24, c: 9, f: 23, beef: { kcal: 365, p: 25, c: 9, f: 25 } }],
