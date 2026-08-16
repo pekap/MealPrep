@@ -1,0 +1,20 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "mealprep",
+  "main": "worker.js",
+  "compatibility_date": "2026-08-01",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "mealprep-db",
+      "database_id": "504c00d9-7322-454c-aab7-3b8a54b18531"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}

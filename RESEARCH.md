@@ -27,6 +27,14 @@ Research date: August 15, 2026. Scope: recent meal-prep, modular cooking, budget
 
 The webpage paraphrases methods and scales the plan for one adult. It deliberately substitutes canned chickpeas for pressure-cooked dried chickpeas to shorten the first-week prep; the original video notes that dried chickpeas can deliver a crisper result.
 
+## Rice component swap (Mediterranean week)
+
+The golden raisin rice from the 14-day lunch video was replaced with Mike's [cilantro rice, 12:42](https://www.youtube.com/watch?v=-35JXpiQ3EA&t=762s) from [A Revolution in Meal Prepping…](https://www.youtube.com/watch?v=-35JXpiQ3EA), at the planner's request for a raisin-free rice. This is the only component in the Mediterranean week sourced from a different video, and its recipe card links to that video rather than the plan's primary source.
+
+Mike's [public recipe document](https://docs.google.com/document/d/1SfdpppBdyXXXClSx47aDjUZK2pIhm7TZsX9RRF9Kjb4/edit) specifies "2 cups of Jasmine or Basmati rice" — the planner buys jasmine and keeps basmati as an accepted substitute. His quantities (1 cup broth, 2 cups water, 1 cup chopped cilantro, 1 lime) and his sequencing are preserved, including the instruction to cool the rice before folding in the herbs so the cilantro is not cooked. Two adaptations: the recipe names generic chicken broth where the video uses a sponsor's brand, and it adds a stove-top alternative (15 minutes covered, 10 minutes rested) because the rest of the week assumes an air fryer and two burners rather than a rice cooker.
+
+Flavor note: cilantro and lime read Latin rather than Mediterranean, but the component's job in this plan is unchanged — a herb-and-acid grain that works hot under meatballs and cold in the Friday leftover box, and that sits comfortably with the yogurt–feta sauce and harissa sweet potatoes.
+
 ## Meal-card video frames
 
 The meal-card visuals are clean frames extracted from the raw video stream for [The 14-Day Lunch System That Never Gets Boring](https://www.youtube.com/watch?v=3oppqhMEy2I). They are visual references for the modular components and assembly pattern rather than a claim that every extrapolated pita, box, or bowl appears as a named recipe in the video.

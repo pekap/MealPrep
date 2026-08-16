@@ -15,10 +15,33 @@ let activeProtein = localStorage.getItem("prep-protein") || "turkey";
 if (!proteinOptions[activeProtein]) activeProtein = "turkey";
 let activeFilter = "all";
 let checked = loadChecked();
+let doneSteps = loadDoneSteps();
 
 function plan() { return plans[activePlan]; }
 function loadChecked() { return new Set(JSON.parse(localStorage.getItem(`prep-checked-${activePlan}`) || "[]")); }
 function saveChecked() { localStorage.setItem(`prep-checked-${activePlan}`, JSON.stringify([...checked])); }
+function loadDoneSteps() { return new Set(JSON.parse(localStorage.getItem(`prep-done-${activePlan}`) || "[]")); }
+function saveDoneSteps() { localStorage.setItem(`prep-done-${activePlan}`, JSON.stringify([...doneSteps])); }
+
+async function api(path, options) {
+  try { const r = await fetch(path, options); return r.ok ? await r.json() : null; } catch { return null; }
+}
+function pushCheck(kind, index, done) {
+  api("/api/checks", { method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify({ plan: activePlan, kind, index, done }) });
+}
+async function syncChecks() {
+  const remote = await api(`/api/checks?plan=${activePlan}`);
+  if (!remote) return;
+  checked = new Set(remote.shop); saveChecked();
+  doneSteps = new Set(remote.steps); saveDoneSteps();
+  renderShopping(); renderTimeline();
+}
+async function syncPlans() {
+  const remote = await api("/api/plans");
+  if (!remote) return;
+  Object.keys(plans).forEach(key => { if (remote[key]) plans[key] = remote[key]; });
+  renderAll();
+}
 function adapt(value) {
   if (activePlan !== "mediterranean" || activeProtein === "turkey" || typeof value !== "string") return value;
   return value.replaceAll("Turkey", "Beef").replaceAll("turkey", "beef").replaceAll("165°F", "160°F");
@@ -33,6 +56,14 @@ function currentShopping() {
 }
 function formatTime(seconds) { return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`; }
 function frameLink(frame) { return `${frame.video}&t=${frame.seconds}s`; }
+function pickMacros(macros) {
+  if (!macros) return null;
+  return activePlan === "mediterranean" && activeProtein === "beef" && macros.beef ? macros.beef : macros;
+}
+function macroLine(macros) {
+  const mm = pickMacros(macros);
+  return mm ? `<p class="meal-macros">${mm.kcal} kcal · ${mm.p}P · ${mm.c}C · ${mm.f}F</p>` : "";
+}
 
 function renderPlanToggle() {
   document.querySelector("#planToggle").innerHTML = Object.entries(plans).map(([key, item]) =>
@@ -55,7 +86,7 @@ function renderStatic() {
   document.querySelector("#weekNote").textContent = p.weekNote;
   document.querySelector("#componentHeading").textContent = p.componentHeading;
   document.querySelector("#freezeCopy").textContent = adapt(p.freezeCopy);
-  document.querySelector("#prepHeading").textContent = `Sunday prep · ${p.prepMinutes} minutes`;
+  document.querySelector("#prepHeading").textContent = `Cook tonight · ${p.prepMinutes} min`;
   document.querySelector("#prepEquipment").textContent = p.equipment;
   document.querySelector("#methodNote").textContent = p.methodNote;
   document.querySelector("#proteinControl").classList.toggle("hidden", activePlan !== "mediterranean");
@@ -76,6 +107,9 @@ function renderWeek() {
   document.querySelector("#weekGrid").innerHTML = plan().meals.map((d, i) => `
     <article class="day-card"><div class="day-top"><strong>${d[0]}</strong><span>AUG ${d[1]}</span></div>
     ${slot("Lunch", d[2], i, 2)}${slot("Dinner", d[3], i, 3)}</article>`).join("");
+  const footnote = document.querySelector("#macroFootnote");
+  footnote.textContent = plan().macroNote || "";
+  footnote.classList.toggle("hidden", !plan().macroNote);
 }
 
 function slot(label, data, index, key) {
@@ -84,30 +118,77 @@ function slot(label, data, index, key) {
     <a class="meal-visual" href="${frameLink(m.frame)}" target="_blank" rel="noreferrer" aria-label="Watch source at ${formatTime(m.frame.seconds)}">
       <img src="${m.frame.image}" alt="${m.frame.alt}" loading="lazy"><span><b>VIDEO FRAME</b>${formatTime(m.frame.seconds)} ↗</span>
     </a>
-    <div class="meal-slot-copy"><div><span class="meal-label">${label}</span><h3>${m.name}</h3></div>
+    <div class="meal-slot-copy"><div><span class="meal-label">${label}</span><h3>${m.name}</h3>${macroLine(m.macros)}</div>
       <div class="meal-details"><div class="meal-tags">${m.tags.slice(0, 2).map(t => `<span>${t}</span>`).join("")}</div><button class="build-button" data-day="${index}" data-meal="${key}" aria-label="View ${m.name} details">↗</button></div>
     </div></div>`;
 }
 
 function renderComponents() {
-  document.querySelector("#componentGrid").innerHTML = plan().components.map(c =>
-    `<article class="component-card"><div class="component-number">${c[0]}</div><h3>${adapt(c[1])}</h3><p>${adapt(c[2])}</p><div class="component-meta">${c[3].map(x => `<span>${x}</span>`).join("")}</div></article>`
-  ).join("");
+  document.querySelector("#componentGrid").innerHTML = plan().components.map(c => {
+    const mm = pickMacros(c[4]);
+    const macros = mm ? `<p class="component-macros">${mm.kcal} kcal · ${mm.p}P · ${mm.c}C · ${mm.f}F <small>per portion</small></p>` : "";
+    return `<article class="component-card"><div class="component-number">${c[0]}</div><h3>${adapt(c[1])}</h3><p>${adapt(c[2])}</p>${macros}<div class="component-meta">${c[3].map(x => `<span>${x}</span>`).join("")}</div></article>`;
+  }).join("");
 }
 
 function renderTimeline() {
-  document.querySelector("#timeline").innerHTML = plan().timeline.map(t =>
-    `<li class="timeline-item"><span class="timeline-count"></span><div class="timeline-copy"><h3>${t[1]}</h3><p>${adapt(t[2])}</p></div><span class="timeline-time">${t[0]}</span></li>`
-  ).join("");
+  const p = plan();
+  renderOrderNotes();
+  if (!p.prepTonight) {
+    document.querySelector("#timeline").innerHTML = p.timeline.map(t =>
+      `<li class="timeline-item"><span class="timeline-count"></span><div class="timeline-copy"><h3>${t[1]}</h3><p>${adapt(t[2])}</p></div><span class="timeline-time">${t[0]}</span></li>`
+    ).join("");
+    renderPrepProgress();
+    return;
+  }
+  document.querySelector("#timeline").innerHTML = p.prepTonight.map((s, i) => {
+    const done = doneSteps.has(i);
+    return `<li class="timeline-item prep-step ${done ? "done" : ""}">
+      <button class="step-check" type="button" data-step="${i}" aria-pressed="${done}" aria-label="Mark step ${i + 1} ${done ? "not done" : "done"}">${done ? "✓" : ""}</button>
+      <div class="timeline-copy">
+        <div class="step-head"><h3>${adapt(s.title)}</h3><span class="step-mins">~${s.mins} min</span></div>
+        <ol class="step-actions">${s.actions.map(a => `<li>${adapt(a)}</li>`).join("")}</ol>
+        <p class="step-tip"><b>TIP</b> ${adapt(s.tip)}</p>
+        <div class="step-items">${s.items.map(x => `<span>${adapt(x)}</span>`).join("")}</div>
+      </div>
+      <div class="step-side">
+        <span class="timeline-time">${s.time}</span>
+        <a class="step-frame" href="${frameLink(s.frame)}" target="_blank" rel="noreferrer" aria-label="Watch this step in the source video at ${formatTime(s.frame.seconds)}">
+          <img src="${s.frame.image}" alt="${s.frame.alt}" loading="lazy"><span>${formatTime(s.frame.seconds)} ↗</span>
+        </a>
+      </div>
+    </li>`;
+  }).join("");
+  renderPrepProgress();
+}
+
+function renderOrderNotes() {
+  const host = document.querySelector("#prepNotes");
+  const data = plan().orderNotes;
+  host.classList.toggle("hidden", !data);
+  host.innerHTML = data ? `<p class="order-notes-label">${data.label}</p><ul>${data.notes.map(n => `<li>${n}</li>`).join("")}</ul>` : "";
+}
+
+function renderPrepProgress() {
+  const steps = plan().prepTonight;
+  const progress = document.querySelector("#prepProgress");
+  const reset = document.querySelector("#prepReset");
+  progress.classList.toggle("hidden", !steps);
+  reset.classList.toggle("hidden", !steps || !doneSteps.size);
+  if (!steps) return;
+  const left = steps.reduce((sum, s, i) => sum + (doneSteps.has(i) ? 0 : s.mins), 0);
+  progress.textContent = doneSteps.size === steps.length ? "Done — the week is prepped" : `${doneSteps.size} of ${steps.length} · ~${left} min left`;
 }
 
 function renderRecipes() {
   document.querySelector("#recipeGrid").innerHTML = plan().recipes.map(r => {
     const beefNote = activePlan === "mediterranean" && activeProtein === "beef" && r[0].toLowerCase().includes("turkey")
       ? `<p class="swap-note">Beef adaptation · the linked source uses turkey. Cook ground beef to 160°F.</p>` : "";
+    const sourceVideo = r[6] || plan().video;
+    const sourceLabel = r[6] ? `OTHER VIDEO · ${formatTime(r[5])} ↗` : `SOURCE · ${formatTime(r[5])} ↗`;
     return `<details class="recipe-card"><summary><span>${adapt(r[0])}</span><span class="method-chip">${r[1]}</span></summary>
       <div class="recipe-body"><p>${adapt(r[2])}</p>${beefNote}<div class="recipe-ingredients">${r[3].map(x => `<span>${adapt(x)}</span>`).join("")}</div>
-      <ol class="recipe-steps">${r[4].map(x => `<li>${adapt(x)}</li>`).join("")}</ol><a class="recipe-source" target="_blank" rel="noreferrer" href="${plan().video}&t=${r[5]}s">SOURCE · ${formatTime(r[5])} ↗</a></div></details>`;
+      <ol class="recipe-steps">${r[4].map(x => `<li>${adapt(x)}</li>`).join("")}</ol><a class="recipe-source" target="_blank" rel="noreferrer" href="${sourceVideo}&t=${r[5]}s">${sourceLabel}</a></div></details>`;
   }).join("");
 }
 
@@ -146,6 +227,10 @@ function openMeal(dayIndex, key) {
   document.querySelector("#dialogSource").href = frameLink(m.frame);
   document.querySelector("#dialogSourceLabel").textContent = `Source video · ${formatTime(m.frame.seconds)} ↗`;
   document.querySelector("#dialogDescription").textContent = m.description;
+  const mm = pickMacros(m.macros);
+  document.querySelector("#dialogMacros").innerHTML = mm
+    ? `<div><strong>${mm.kcal}</strong><span>kcal</span></div><div><strong>${mm.p}g</strong><span>protein</span></div><div><strong>${mm.c}g</strong><span>carbs</span></div><div><strong>${mm.f}g</strong><span>fat</span></div>`
+    : "";
   document.querySelector("#dialogBuild").innerHTML = m.tags.map(t => `<span>${t}</span>`).join("");
   document.querySelector("#dialogMethod").innerHTML = `<b>Fast finish</b><br>${m.method}`;
   document.querySelector("#mealDialog").showModal();
@@ -169,7 +254,18 @@ document.addEventListener("click", event => {
   const planButton = event.target.closest(".plan-option");
   if (planButton && planButton.dataset.plan !== activePlan) {
     activePlan = planButton.dataset.plan; localStorage.setItem("prep-plan", activePlan);
-    activeFilter = "all"; checked = loadChecked(); renderAll(); window.scrollTo({ top: 0, behavior: "smooth" }); showToast(`${plan().label} week loaded`);
+    activeFilter = "all"; checked = loadChecked(); doneSteps = loadDoneSteps(); renderAll(); syncChecks(); window.scrollTo({ top: 0, behavior: "smooth" }); showToast(`${plan().label} week loaded`);
+  }
+  const stepCheck = event.target.closest(".step-check");
+  if (stepCheck) {
+    const index = Number(stepCheck.dataset.step);
+    const done = !doneSteps.has(index);
+    done ? doneSteps.add(index) : doneSteps.delete(index);
+    saveDoneSteps(); pushCheck("step", index, done); renderTimeline();
+  }
+  if (event.target.closest("#prepReset")) {
+    doneSteps = new Set(); saveDoneSteps(); api(`/api/checks?plan=${activePlan}&kind=step`, { method: "DELETE" });
+    renderTimeline(); showToast("Prep progress reset");
   }
   const protein = event.target.closest(".protein-option");
   if (protein && protein.dataset.protein !== activeProtein) {
@@ -182,7 +278,7 @@ document.querySelector("#shoppingList").addEventListener("change", event => {
   if (!event.target.matches("input[type='checkbox']")) return;
   const index = Number(event.target.dataset.index);
   event.target.checked ? checked.add(index) : checked.delete(index);
-  saveChecked(); renderShopping();
+  saveChecked(); pushCheck("shop", index, event.target.checked); renderShopping();
 });
 document.querySelector("#copyList").addEventListener("click", async () => {
   const list = currentShopping().filter((_, i) => !checked.has(i)).map(([, name, qty]) => `${name} — ${qty}`).join("\n");
@@ -195,3 +291,4 @@ document.querySelector("#themeToggle").addEventListener("click", () => {
 });
 if (localStorage.getItem("prep-theme") === "dark") document.body.classList.add("dark");
 renderAll();
+syncPlans().then(syncChecks);

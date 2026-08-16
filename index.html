@@ -39,7 +39,8 @@
             <p class="hero-copy" id="heroCopy"></p>
             <p class="protein-note" id="proteinNote"></p>
             <div class="hero-actions">
-              <a class="button primary" href="#week">View the week <span>↓</span></a>
+              <a class="button primary" href="#prep">Cook tonight <span>↓</span></a>
+              <a class="button ghost" href="#week">View the week</a>
               <a class="button ghost" href="#shop">Shopping list</a>
             </div>
           </div>
@@ -59,15 +60,43 @@
         </div>
       </section>
 
+      <section class="section-shell section-block" id="prep">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">01 · TONIGHT</p>
+            <h2 id="prepHeading">Cook tonight · 90 min</h2>
+          </div>
+          <div class="prep-meta">
+            <span id="prepProgress" class="prep-progress">0 of 7 · 90 min left</span>
+            <span id="prepEquipment">Air fryer + 2 burners</span>
+            <button id="prepReset" class="prep-reset" type="button">Reset</button>
+          </div>
+        </div>
+
+        <div class="order-notes" id="prepNotes"></div>
+
+        <div class="prep-layout">
+          <ol class="timeline" id="timeline"></ol>
+          <aside class="prep-aside" id="prepAside"></aside>
+        </div>
+
+        <div class="recipe-heading">
+          <h3>Core recipes</h3>
+          <span>Open a recipe when you need it</span>
+        </div>
+        <div class="recipe-grid" id="recipeGrid"></div>
+      </section>
+
       <section class="section-shell section-block" id="week">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">01 · THE WEEK</p>
+            <p class="eyebrow">02 · THE WEEK</p>
             <h2>Week at a glance</h2>
           </div>
           <p id="weekNote">Same components, different geometry: bowl, pita, plate, salad, and snack box.</p>
         </div>
         <div class="week-grid" id="weekGrid"></div>
+        <p class="macro-footnote" id="macroFootnote"></p>
       </section>
 
       <section class="components-band">
@@ -81,30 +110,6 @@
           </div>
           <div class="component-grid" id="componentGrid"></div>
         </div>
-      </section>
-
-      <section class="section-shell section-block" id="prep">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">02 · SUNDAY PREP</p>
-            <h2 id="prepHeading">Sunday prep · 90 minutes</h2>
-          </div>
-          <div class="prep-meta">
-            <span id="prepDate">Sun · Aug 16</span>
-            <span id="prepEquipment">Air fryer + 2 burners</span>
-          </div>
-        </div>
-
-        <div class="prep-layout">
-          <ol class="timeline" id="timeline"></ol>
-          <aside class="prep-aside" id="prepAside"></aside>
-        </div>
-
-        <div class="recipe-heading">
-          <h3>Core recipes</h3>
-          <span>Open a recipe when you need it</span>
-        </div>
-        <div class="recipe-grid" id="recipeGrid"></div>
       </section>
 
       <section class="shopping-section" id="shop">
@@ -159,6 +164,7 @@
         <span id="dialogSourceLabel"></span>
       </a>
       <p class="dialog-description" id="dialogDescription"></p>
+      <div class="dialog-macros" id="dialogMacros"></div>
       <div class="dialog-build" id="dialogBuild"></div>
       <div class="dialog-method" id="dialogMethod"></div>
     </dialog>
