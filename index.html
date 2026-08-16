@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#111111" />
+    <meta name="description" content="Three modular Mike G-inspired meal-prep plans for August 17–23, 2026." />
+    <title>Prep Week — Aug 17–23</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Prep Week home">
+        <span class="brand-mark" aria-hidden="true">P/</span>
+        <span>PREP WEEK</span>
+      </a>
+      <div class="plan-toggle" id="planToggle" aria-label="Choose a weekly meal plan"></div>
+      <div class="topbar-actions">
+        <div class="protein-control" id="proteinControl">
+          <span class="protein-toggle-label">Protein</span>
+          <div class="protein-toggle" id="proteinToggle" aria-label="Choose protein base"></div>
+        </div>
+        <button class="icon-button" id="themeToggle" type="button" aria-label="Toggle dark mode">◐</button>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero section-shell">
+        <div class="eyebrow-row">
+          <p class="eyebrow" id="heroEyebrow">AUG 17—23 · ONE PERSON · LUNCH + DINNER</p>
+          <span class="status-pill"><span></span> Editable plan</span>
+        </div>
+        <div class="hero-grid">
+          <div>
+            <h1 id="heroTitle">Meal plan · Aug 17–23</h1>
+            <p class="hero-copy" id="heroCopy"></p>
+            <p class="protein-note" id="proteinNote"></p>
+            <div class="hero-actions">
+              <a class="button primary" href="#week">View the week <span>↓</span></a>
+              <a class="button ghost" href="#shop">Shopping list</a>
+            </div>
+          </div>
+          <div class="hero-card" aria-label="Week summary">
+            <div class="hero-card-top">
+              <span class="hero-card-label">THE FORMULA</span>
+              <span class="air-fryer-chip">AIR FRYER FIRST</span>
+            </div>
+            <div id="formulaList"></div>
+            <div class="formula-plus" id="formulaPlus"></div>
+            <div class="hero-metrics">
+              <div><strong>14</strong><span>meals</span></div>
+              <div><strong id="prepMinutes">90</strong><span>prep min</span></div>
+              <div><strong id="coreCount">5</strong><span>core cooks</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-shell section-block" id="week">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">01 · THE WEEK</p>
+            <h2>Week at a glance</h2>
+          </div>
+          <p id="weekNote">Same components, different geometry: bowl, pita, plate, salad, and snack box.</p>
+        </div>
+        <div class="week-grid" id="weekGrid"></div>
+      </section>
+
+      <section class="components-band">
+        <div class="section-shell">
+          <div class="section-heading light-heading">
+            <div>
+              <p class="eyebrow">THE COMPONENT LIBRARY</p>
+              <h2 id="componentHeading">Prep components</h2>
+            </div>
+            <p id="freezeCopy">Freeze half the turkey portions. Keep rice, sauce, and crunch separate so textures stay sharp.</p>
+          </div>
+          <div class="component-grid" id="componentGrid"></div>
+        </div>
+      </section>
+
+      <section class="section-shell section-block" id="prep">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">02 · SUNDAY PREP</p>
+            <h2 id="prepHeading">Sunday prep · 90 minutes</h2>
+          </div>
+          <div class="prep-meta">
+            <span id="prepDate">Sun · Aug 16</span>
+            <span id="prepEquipment">Air fryer + 2 burners</span>
+          </div>
+        </div>
+
+        <div class="prep-layout">
+          <ol class="timeline" id="timeline"></ol>
+          <aside class="prep-aside" id="prepAside"></aside>
+        </div>
+
+        <div class="recipe-heading">
+          <h3>Core recipes</h3>
+          <span>Open a recipe when you need it</span>
+        </div>
+        <div class="recipe-grid" id="recipeGrid"></div>
+      </section>
+
+      <section class="shopping-section" id="shop">
+        <div class="section-shell">
+          <div class="section-heading light-heading">
+            <div>
+              <p class="eyebrow">03 · SHOPPING</p>
+              <h2>Shopping list</h2>
+            </div>
+            <div class="shopping-summary">
+              <strong id="remainingCount">0</strong>
+              <span>items left</span>
+            </div>
+          </div>
+          <div class="shop-toolbar">
+            <div class="filter-group" id="filterGroup" aria-label="Filter shopping list"></div>
+            <button class="button cream" id="copyList" type="button">Copy remaining list</button>
+          </div>
+          <div class="shopping-list" id="shoppingList"></div>
+          <div class="amazon-note">
+            <span>↗</span>
+            <p>Each item opens a focused Amazon Fresh search. Availability and final pricing depend on your delivery address.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-shell section-block" id="sources">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">04 · RESEARCH NOTES</p>
+            <h2>Sources & timestamps</h2>
+          </div>
+          <p>Recent meal-prep videos only. Recipe documents, transcript cues, and the most relevant timestamps are linked.</p>
+        </div>
+        <details class="sources-disclosure">
+          <summary>Show research notes, video links, and timestamps</summary>
+          <div class="source-grid" id="sourceGrid"></div>
+          <div class="method-note">
+            <span>WHY THIS PLAN</span>
+            <p id="methodNote"></p>
+          </div>
+        </details>
+      </section>
+    </main>
+
+    <dialog id="mealDialog" class="meal-dialog">
+      <button class="dialog-close" type="button" aria-label="Close meal details">×</button>
+      <p class="eyebrow" id="dialogLabel"></p>
+      <h2 id="dialogTitle"></h2>
+      <a class="dialog-visual" id="dialogSource" target="_blank" rel="noreferrer">
+        <img id="dialogImage" alt="" />
+        <span id="dialogSourceLabel"></span>
+      </a>
+      <p class="dialog-description" id="dialogDescription"></p>
+      <div class="dialog-build" id="dialogBuild"></div>
+      <div class="dialog-method" id="dialogMethod"></div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
