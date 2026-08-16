@@ -288,14 +288,25 @@ document.querySelector("#copyList").addEventListener("click", async () => {
 document.querySelector(".dialog-close").addEventListener("click", () => document.querySelector("#mealDialog").close());
 document.querySelector("#mealDialog").addEventListener("click", event => { if (event.target === event.currentTarget) event.currentTarget.close(); });
 const themeNames = { minimal: "Minimal", dark: "Dark", swift: "Taylor’s Version", mono: "Mono" };
-let activeTheme = localStorage.getItem("prep-theme") || "minimal";
-if (!themeNames[activeTheme]) activeTheme = activeTheme === "light" ? "minimal" : "minimal";
+function readThemeCookie() {
+  return document.cookie.split("; ").find(row => row.startsWith("prep-theme="))?.split("=")[1];
+}
+function writeThemeCookie(theme) {
+  document.cookie = `prep-theme=${theme}; max-age=31536000; path=/; samesite=lax`;
+}
+// Priority: ?theme= in the link → cookie → legacy localStorage → default.
+const urlTheme = new URLSearchParams(location.search).get("theme");
+let activeTheme = [urlTheme, readThemeCookie(), localStorage.getItem("prep-theme")].find(t => themeNames[t]) || "minimal";
 let swiftModule = null;
 
 async function applyTheme(theme) {
   const previous = activeTheme;
   activeTheme = theme;
+  writeThemeCookie(theme);
   localStorage.setItem("prep-theme", theme);
+  const url = new URL(location);
+  url.searchParams.set("theme", theme);
+  history.replaceState(null, "", url);
   document.body.dataset.theme = theme;
   document.querySelector("#themeLabel").textContent = themeNames[theme];
   document.querySelectorAll("[data-theme-pick]").forEach(b => b.classList.toggle("active", b.dataset.themePick === theme));
